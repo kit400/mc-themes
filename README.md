@@ -1,23 +1,43 @@
-# Тема Midnight Commander — `kit256.ini`
+# Midnight Commander Theme — `kit256.ini`
 
-Это тема `kit256.ini` для [Midnight Commander](https://midnight-commander.org/),  поддерживающая 256 цветов терминала.  
+This is a 256-color theme for [Midnight Commander](https://midnight-commander.org/),  designed with a light color scheme and high contrast for readability and comfort.
 
-## 💾 Установка
+![Preview of kit256 theme](docs/screenshots/kit256-screenshot.png)
 
+---
+
+## 💾 Installation via Script
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/kit400/mc-themes.git 
+   cd mc-themes
+   chmod +x install.sh
+   ./install.sh
+   ```
+   Follow the on-screen instructions to choose between user-wide or system-wide installation.
+   
+   After installation, open mc, press F9 → Options → Appearance, and select kit256.
+   Or
+ ```bash 
+ sed -i 's|\(^skin=\).*$|\kit256|' ~/.config/mc/ini```
+ 
+## 🧵 Option 2: Manual Installation 
+ 
+ ```bash
+git clone https://github.com/kit400/mc-themes.git 
+cd mc-themes```
+
+Copy the theme file manually:
+   
 1. Copy `kit256.ini` в директорию тем Midnight Commander:
 
 ```bash
    cp kit256.ini ~/.local/share/mc/skins/
 ```
-или глобально:
+For system-wide install:
 ```bash
    sudo cp kit256.ini /usr/share/mc/skins/
 ```
 
-## Activating
-```# F9 > Options > Appearance```
- Or
- ```bash 
- sed -i 's|\(^skin=\).*$|\kit256|' ~/.config/mc/ini
- ```
-![kit256 Dark theme for mc](https://raw.githubusercontent.com/kit400/mc-themes/refs/heads/main/docs/screenshots/kit256-screenshot.png)
