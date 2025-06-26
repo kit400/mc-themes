@@ -54,13 +54,17 @@ read -p "Apply theme automatically? " APPLY_THEME
 
 if [[ "$APPLY_THEME" == "y" ]]; then
     MC_INI="$HOME/.config/mc/ini"
-    if [ -f "$MC_INI" ]; then
-        # Apply theme using sed
-        sed -i 's|^\(skin=\).*|\kit256|' "$MC_INI"
-        echo "🎨 Theme set to 'kit256' in $MC_INI"
+    
+    # Ensure .config/mc directory exists
+    mkdir -p "$(dirname "$MC_INI")"
+
+    # Apply or update the skin setting
+    if grep -q '^skin=' "$MC_INI"; then
+        sed -i 's|^skin=.*|skin=kit256|' "$MC_INI"
+        echo "🎨 Theme updated in $MC_INI"
     else
-        echo "⚠️ File $MC_INI not found. Can't auto-apply theme."
-        echo "   You can manually edit ~/.config/mc/ini and add: skin=kit256"
+        echo "skin=kit256" >> "$MC_INI"
+        echo "🎨 Theme added to $MC_INI"
     fi
 else
     echo "💡 To apply the theme later, edit ~/.config/mc/ini and set: skin=kit256"
