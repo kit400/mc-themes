@@ -40,4 +40,5 @@ After installation, open mc, press F9 → Options → Appearance, and select kit
 Or
 
  ```bash 
- sed -i 's|\(^skin=\).*$|\kit256|' ~/.config/mc/ini```
+ sed -i 's|\(^skin=\).*$|\kit256|' ~/.config/mc/ini
+ ```
