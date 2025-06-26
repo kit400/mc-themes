@@ -1,52 +1,71 @@
 #!/bin/bash
 
-# Путь к исходному файлу темы
+# Source theme file
 THEME_SRC="kit256.ini"
 
-# Проверяем, установлен ли mc
+# Check if mc is installed
 if ! command -v mc &> /dev/null
 then
-    echo "❌ Midnight Commander не установлен. Установите его с помощью вашего пакетного менеджера."
+    echo "❌ Midnight Commander is not installed. Please install it first."
     exit 1
 fi
 
-# Определяем пути для установки
+# Define skin directories
 USER_SKIN_DIR="$HOME/.local/share/mc/skins"
 SYSTEM_SKIN_DIR="/usr/share/mc/skins"
 
-# Запрашиваем у пользователя тип установки
-echo "Выберите тип установки:"
-echo "1) Пользовательская (в домашнюю папку)"
-echo "2) Системная (требует sudo)"
-read -p "Введите номер (1 или 2): " INSTALL_TYPE
+# Ask user for installation type
+echo "Choose installation type:"
+echo "1) User-wide (to $USER_SKIN_DIR)"
+echo "2) System-wide (to $SYSTEM_SKIN_DIR, requires sudo)"
+read -p "Enter choice (1 or 2): " INSTALL_TYPE
 
 case $INSTALL_TYPE in
     1)
+        mkdir -p "$USER_SKIN_DIR"
+        cp "$THEME_SRC" "$USER_SKIN_DIR/"
+        echo "✅ Theme installed to $USER_SKIN_DIR"
         TARGET_DIR="$USER_SKIN_DIR"
-        mkdir -p "$TARGET_DIR"
-        cp "$THEME_SRC" "$TARGET_DIR/"
-        echo "✅ Тема успешно установлена в $TARGET_DIR"
         ;;
     2)
         if [ "$(id -u)" -ne 0 ]; then
-            echo "⚠️ Для системной установки требуется sudo."
-            read -p "Продолжить с sudo? (y/n): " CONFIRM
+            echo "⚠️ This requires sudo access."
+            read -p "Proceed with sudo? (y/n): " CONFIRM
             if [[ "$CONFIRM" != "y" ]]; then
-                echo "❌ Установка отменена."
+                echo "❌ Installation cancelled."
                 exit 1
             fi
         fi
+        mkdir -p "$SYSTEM_SKIN_DIR"
+        sudo cp "$THEME_SRC" "$SYSTEM_SKIN_DIR/"
+        echo "✅ Theme installed to $SYSTEM_SKIN_DIR"
         TARGET_DIR="$SYSTEM_SKIN_DIR"
-        sudo mkdir -p "$TARGET_DIR"
-        sudo cp "$THEME/src" "$TARGET_DIR/"
-        echo "✅ Тема успешно установлена в $TARGET_DIR"
         ;;
     *)
-        echo "❌ Неверный выбор. Установка отменена."
+        echo "❌ Invalid choice. Installation cancelled."
         exit 1
         ;;
 esac
 
+# Ask if user wants to apply the theme automatically
 echo ""
-echo "🎉 Установка завершена!"
-echo "Откройте Midnight Commander (mc), нажмите F9 → Options → Appearance и выберите 'kit256'."
+echo "Do you want to set 'kit256' as your current theme now? (y/n)"
+read -p "Apply theme automatically? " APPLY_THEME
+
+if [[ "$APPLY_THEME" == "y" ]]; then
+    MC_INI="$HOME/.config/mc/ini"
+    if [ -f "$MC_INI" ]; then
+        # Apply theme using sed
+        sed -i 's|^\(skin=\).*|\kit256|' "$MC_INI"
+        echo "🎨 Theme set to 'kit256' in $MC_INI"
+    else
+        echo "⚠️ File $MC_INI not found. Can't auto-apply theme."
+        echo "   You can manually edit ~/.config/mc/ini and add: skin=kit256"
+    fi
+else
+    echo "💡 To apply the theme later, edit ~/.config/mc/ini and set: skin=kit256"
+fi
+
+echo ""
+echo "🎉 Installation complete!"
+echo "Launch Midnight Commander (mc), press F9 → Options → Appearance, and select 'kit256'."
