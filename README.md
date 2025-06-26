@@ -4,7 +4,7 @@
 
 ## 💾 Установка
 
-1. Скопируйте файл `kit256.ini` в директорию тем Midnight Commander:
+1. Copy `kit256.ini` в директорию тем Midnight Commander:
 
 ```bash
    cp kit256.ini ~/.local/share/mc/skins/
@@ -13,3 +13,11 @@
 ```bash
    sudo cp kit256.ini /usr/share/mc/skins/
 ```
+
+## Activating
+```# F9 > Options > Appearance```
+ Or
+ ```bash 
+ sed -i 's|\(^skin=\).*$|\kit256|' ~/.config/mc/ini
+ ```
+![kit256 Dark theme for mc](https://raw.githubusercontent.com/kit400/mc-themes/refs/heads/main/docs/screenshots/kit256-screenshot.png)
