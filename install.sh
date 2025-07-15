@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Source theme file
-#THEME_SRC="kit256.ini"
-THEME_SRC="*.ini"
 # Check if mc is installed
 if ! command -v mc &> /dev/null
 then
@@ -23,7 +20,7 @@ read -p "Enter choice (1 or 2): " INSTALL_TYPE
 case $INSTALL_TYPE in
     1)
         mkdir -p "$USER_SKIN_DIR"
-        cp "$THEME_SRC" "$USER_SKIN_DIR/"
+        cp *.ini "$USER_SKIN_DIR/"
         echo "✅ Theme installed to $USER_SKIN_DIR"
         TARGET_DIR="$USER_SKIN_DIR"
         ;;
@@ -37,7 +34,7 @@ case $INSTALL_TYPE in
             fi
         fi
         mkdir -p "$SYSTEM_SKIN_DIR"
-        sudo cp "$THEME_SRC" "$SYSTEM_SKIN_DIR/"
+        sudo cp *.ini "$SYSTEM_SKIN_DIR/"
         echo "✅ Theme installed to $SYSTEM_SKIN_DIR"
         TARGET_DIR="$SYSTEM_SKIN_DIR"
         ;;
