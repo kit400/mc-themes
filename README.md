@@ -1,8 +1,14 @@
-# Midnight Commander Theme — `kit256.ini`
+# Midnight Commander Themes
 
 This is a 256-color theme for [Midnight Commander](https://midnight-commander.org/),  designed with a light color scheme and high contrast for readability and comfort.
 
+## `kit256.ini`
+
 ![Preview of kit256 theme](docs/screenshots/kit256-screenshot.png)
+
+## `kit256-sd.ini`
+
+![Preview of kit256 theme](docs/screenshots/kit256-sd-screenshot.png)
 
 ---
 
@@ -23,7 +29,8 @@ This is a 256-color theme for [Midnight Commander](https://midnight-commander.or
  
  ```bash
 git clone https://github.com/kit400/mc-themes.git 
-cd mc-themes```
+cd mc-themes
+```
 
 Copy the theme file manually:
 

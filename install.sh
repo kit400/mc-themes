@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Source theme file
-THEME_SRC="kit256.ini"
-
+#THEME_SRC="kit256.ini"
+THEME_SRC="*.ini"
 # Check if mc is installed
 if ! command -v mc &> /dev/null
 then
